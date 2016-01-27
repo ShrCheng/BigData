@@ -18,4 +18,74 @@ grammar_cjkRuby: true
 
 术语|解释
 ---|---
-Master|Redis集群的主节点Redis集群的主节点
+Master|Redis集群主节点
+Slave|Redis集群从节点
+
+#### 安装环境
+
+环境|版本
+---|---
+系统OS|CentOS 7.0
+Redis|3.0.0
+
+#### Redis Master节点安装
+
+- 下载安装包
+
+    ```
+    wget http://download.redis.io/releases/redis-3.0.0.tar.gz
+    ```
+
+- 解压安装包
+
+    ```
+    tar -xvzf redis-3.0.0.tar.gz
+    ```
+
+- 编译安装
+
+    进入安装目录
+    
+    ```
+    cd redis-3.0.0/
+    ```
+    
+    编译安装
+    
+    ```
+    make && make install
+    ```
+
+- 修改配置
+
+    ```
+    vi redis-3.0.0/redis.conf
+    ```
+    
+    修改以下文件内容
+    
+    ```
+    daemonize yes
+	logfile "/yisa/data/redis.log"
+	dir "/yisa/data/redisdb"
+    ```
+    
+    **daemonize**: 参数值必须为yes,Redis服务可以后台启动
+    **logfile**: Redis日志存储路径,`该路径必须提前创建`
+    **dir**: Redis数据库数据存储路径,`该路径必须提前创建`
+
+- 启动服务
+
+    ```
+    redis-3.0.0/src/redis-server redis-3.0.0/redis.conf
+    ```
+    在使用`redis-server`时,指定配置文件路径.
+
+- 
+
+    ```
+    
+    ```
+
+
+  [1]: ./images/1453873990319.jpg "1453873990319.jpg"
