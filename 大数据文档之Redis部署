@@ -4,7 +4,7 @@ tags: redis,文档,部署
 grammar_cjkRuby: true
 ---
 
-欢迎使用 **{大数据}(bigdata doc)文档**.
+欢迎使用 **{大数据}(bigdata doc)文档**.文档中的所有配置信息==只供参考==,更多配置详见配置文件.
 
 ---
 
@@ -28,7 +28,7 @@ Slave|Redis集群从节点
 系统OS|CentOS 7.0
 Redis|3.0.0
 
-#### Redis Master节点安装
+#### Redis Master节点
 
 - 下载安装包
 
@@ -79,7 +79,64 @@ Redis|3.0.0
     ```
     redis-3.0.0/src/redis-server redis-3.0.0/redis.conf
     ```
+    
     在使用`redis-server`时,指定配置文件路径.
+
+- 测试服务
+
+    ```
+    redis-3.0.0/src/redis-cli -h 127.0.0.1 -p 6379
+    ```
+    
+    **-h**: 指定Redis机器(住主机名或IP地址)
+    **-p**: Redis端口(默认6379)
+    连接后输入`keys`查看所有的数据
+    
+    > 127.0.0.1:6379> keys *
+    (empty list or set)
+
+#### Redis Slave节点
+
+Slave节点安装与Master相同,只不过需要将`redis.conf`配置修改为以下内容
+
+```
+daemonize yes
+logfile "/yisa/data/redis.log"
+dir "/yisa/data/redisdb"
+slave-read-only yes
+slaveof 192.168.2.104 6379
+```
+**slave-read-only**: 配置slave节点数据只读
+**slaveof**: master节点地址及端口,地址端口之间使用`空格隔开`
+
+- Redis Sentinel 节点
+
+Sentinel节点安装与Master解压编译相同.
+
+- 修改配置
+
+    ```
+    vi redis-3.0.0/sentinel.conf
+    ```
+
+    修改以下文件内容
+    
+    ```
+    daemonize yes
+	sentinel monitor mymaster 192.168.2.104 6379 1
+	sentinel known-slave mymaster 192.168.2.103 6379
+    ```
+    
+    **sentinel monitor**:
+    - **mymaster** 是指sentinel的实例名,改名修改后配置文件中所有出现改名的配置也`必须修改`
+    - **192.168.2.104** Redis Master节点主机名或IP
+    - **6379** Redis Master节点端口
+    - **1** 与Redis失效转移有关的参数,当有1个sentinel实例判断该master为Sdown时,会将其判断为Odown.
+    
+    **sentinel known-slave**: 
+    - **mymaster**: sentinel的实例名
+    - **192.168.2.103**: Redis Slave节点主机名或IP
+    - **6379**: Redis Slave节点端口
 
 - 
 
@@ -88,4 +145,53 @@ Redis|3.0.0
     ```
 
 
-  [1]: ./images/1453873990319.jpg "1453873990319.jpg"
+- 
+
+    ```
+    
+    ```
+
+
+- 
+
+    ```
+    
+    ```
+
+
+- 
+
+    ```
+    
+    ```
+
+
+- 
+
+    ```
+    
+    ```
+
+
+- 
+
+    ```
+    
+    ```
+
+
+- 
+
+    ```
+    
+    ```
+
+
+- 
+
+    ```
+    
+    ```
+
+
+  [1]: ./images/1453875044541.jpg "1453875044541.jpg"
