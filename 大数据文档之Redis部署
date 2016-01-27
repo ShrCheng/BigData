@@ -13,6 +13,7 @@ grammar_cjkRuby: true
 - Redis环境搭建
 - Redis基本命令
 - Redis常见问题
+- Redis GUI
 
 #### 名词术语
 
@@ -138,60 +139,36 @@ Sentinel节点安装与Master解压编译相同.
     - **192.168.2.103**: Redis Slave节点主机名或IP
     - **6379**: Redis Slave节点端口
 
-- 
+- 启动服务
 
     ```
+    redis-3.0.0/src/redis-sentinel redis-3.0.0/sentinel.conf
+    ```
+
+- 测试服务
+
+    ```
+    redis-3.0.0/src/redis-cli -h localhost -p 26379
     
     ```
-
-
-- 
-
-    ```
     
-    ```
+    Redis Sentinel 默认端口 `26379`
 
+- Redis Sentinel常用命令
 
-- 
+    - 查看监控的Master节点信息
 
-    ```
+        ```
+        sentinel master mymaster
+        ```
+
+    - 查看监控的Slave节点信息
     
-    ```
+        ```
+        sentinel slaves mymaster
+        ```
 
+#### 常见问题
 
-- 
-
-    ```
-    
-    ```
-
-
-- 
-
-    ```
-    
-    ```
-
-
-- 
-
-    ```
-    
-    ```
-
-
-- 
-
-    ```
-    
-    ```
-
-
-- 
-
-    ```
-    
-    ```
-
-
-  [1]: ./images/1453875044541.jpg "1453875044541.jpg"
+- **Can't chdir to '/yisa/data/redisdb': No such file or directory**
+该错误是没有创建该目录,创建相应目录即可.
