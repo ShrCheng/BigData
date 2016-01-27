@@ -168,6 +168,14 @@ Sentinel节点安装与Master解压编译相同.
         sentinel slaves mymaster
         ```
 
+#### Redis GUI
+
+- RDM
+
+    ```
+    http://redisdesktop.com/
+    ```
+
 #### 常见问题
 
 - **Can't chdir to '/yisa/data/redisdb': No such file or directory**
