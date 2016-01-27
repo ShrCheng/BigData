@@ -110,7 +110,7 @@ slaveof 192.168.2.104 6379
 **slave-read-only**: 配置slave节点数据只读
 **slaveof**: master节点地址及端口,地址端口之间使用`空格隔开`
 
-- Redis Sentinel 节点
+#### Redis Sentinel 节点
 
 Sentinel节点安装与Master解压编译相同.
 
