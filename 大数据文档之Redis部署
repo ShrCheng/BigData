@@ -15,3 +15,7 @@ grammar_cjkRuby: true
 - Redis常见问题
 
 #### 名词术语
+
+术语|解释
+---|---
+Master|Redis集群的主节点Redis集群的主节点
